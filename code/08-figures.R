@@ -207,6 +207,8 @@ sims <- ggplot() +
 
 # save figure ---------------------------------------------------------------------------
 ggsave("./figures/sims.png", sims, width = 7, height = 4.5, dpi = 600)
+ggsave("./figures/sims.eps", sims, width = 7, height = 4.5, dpi = 600, device = cairo_pdf)
+ggsave("./figures/sims.pdf", sims, width = 7, height = 4.5, dpi = 600, device = cairo_pdf)
 
 
 #### FIGURE 2 ===========================================================================
@@ -262,18 +264,19 @@ colors <- c(rep("black",1), rep("gray60", 37))
 forecasts <- forecasts[-2,]
 
 # build figure --------------------------------------------------------------------------
+# build figure --------------------------------------------------------------------------
 forecast_polls <- ggplot() +
   geom_vline(xintercept = 66.1, color = "gray60", linetype = "longdash") +
   geom_errorbarh(data = forecasts, aes(y = forecasts$poll, xmax = top_1.645, 
                                        xmin = bot_1.645, 
-                                       height = 0), size = .9,colour = colors) +
+                                       height = 0), size = 1.3,colour = colors) +
   geom_errorbarh(data = forecasts, aes(y = forecasts$poll, xmax = top_1.96, 
                                        xmin = bot_1.96, 
-                                       height = 0), size = .6, colour = colors) +
+                                       height = 0), size = .9, colour = colors) +
   geom_errorbarh(data = forecasts, aes(y = forecasts$poll, xmax = top_2.576, 
                                        xmin = bot_2.576, 
-                                       height = 0), size = .3, colour = colors) +
-  geom_point(data = forecasts, aes(x = forecasts$mean, y = forecasts$poll), size = 2, 
+                                       height = 0), size = .7, colour = colors) +
+  geom_point(data = forecasts, aes(x = forecasts$mean, y = forecasts$poll), size = 3, 
              colour = colors) +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
@@ -283,92 +286,95 @@ forecast_polls <- ggplot() +
         axis.ticks.x = element_line(color = "black", size =.25),
         axis.ticks.y = element_blank(), 
         axis.ticks.length = unit(0.25, "cm"),
-        axis.text.x = element_text(size = 10, color = "black"),
+        axis.text.x = element_text(size = 14, color = "black"),
         axis.text.y = element_blank(),
-        axis.title.x = element_text(margin = unit(c(5, 0, 0, 0), "mm"), size = 12, color = "black"),
+        axis.title.x = element_text(margin = unit(c(5, 0, 0, 0), "mm"), size = 16, color = "black"),
         axis.title.y = element_blank()) +
   labs(x = "Second-round vote share", y = NULL) +
   scale_x_continuous(expand = c(0, 0), limits = c(50,75), 
                      breaks = seq(055, 70, by = 5)) +
   scale_y_discrete(expand = c(0, 1)) +
   annotate("text", x = 53, y = 37.1, label = "Elabe (Apr 24)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 36.0, label = "Harris (Apr 23)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 35.1, label = "Ipsos (May 5)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 34.1, label = "Ifop-Fiducial (May 2-5)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 33.1, label = "Odoxa (Apr 24-25)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 32.1, label = "Harris (May 4-5)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 31.1, label = "Odoxa (May 4)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 30.1, label = "Elabe (May 4)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 29.1, label = "OpinionWay (May 2-4)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 28.1, label = "Ipsos (Apr 23)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 27.1, label = "Ipsos (May 4)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 26.1, label = "Ifop-Fiducial (May 1-4)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 25.1, label = "Harris (May 2-3)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 24.1, label = "OpinionWay (May 1-3)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 23.1, label = "OpinionWay (Apr 28-30)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 22.1, label = "Harris (Apr 25-27)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 21.1, label = "Ifop-Fiducial (Apr 23–25)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 20.1, label = "OpinionWay (Apr 23–24)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 19.1, label = "Ifop-Fiducial (Apr 24-27)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 18.1, label = "Ifop-Fiducial (Apr 23–26)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 17.1, label = "Ifop-Fiducial (Apr 30-May 3)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 16.1, label = "BVA (May 1-2)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 15.1, label = "OpinionWay (Apr 30–May 2)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 14.1, label = "OpinionWay (Apr 29–May 1)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 13.1, label = "Ipsos (Apr 28-29)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 12.1, label = "Ifop-Fiducial (Apr 25-28)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 11.1, label = "OpinionWay (Apr 25-27)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 10.1, label = "OpinionWay (Apr 23–25)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 9.1, label = "Ifop-Fiducial (Apr 23–24)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 8.1, label = "Ifop-Fiducial (Apr 28–May 2)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 7.1, label = "Elabe (Apr 28–May 2)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 6.1, label = "Ipsos (Apr 30–May 1)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 5.1, label = "Ifop-Fiducia (Apr 27–May 1)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 4.1, label = "Kantar Sofres (Apr 28-30)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 3.1, label = "BVA (Apr 26-28)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 2.1, label = "Odoxa (Apr 26-27)", family="CMU Serif", 
-           size = 2) +
+           size = 3.5) +
   annotate("text", x = 53, y = 1.1, label = "OpinionWay (Apr 24–26)", family="CMU Serif", 
-           size = 2)
+           size = 3.5)
 
 # save figure ---------------------------------------------------------------------------
-ggsave("./figures/forecast-polls.png", forecast_polls, width = 7, height = 5, 
+ggsave("./figures/forecast-polls.png", forecast_polls, width = 9, height = 7, 
        dpi = 600)
+ggsave("./figures/forecast-polls.eps", forecast_polls, width = 9, height = 7, dpi = 600, device = cairo_pdf)
+ggsave("./figures/forecast-polls.pdf", forecast_polls, width = 9, height = 7, dpi = 600, device = cairo_pdf)
+
 
 
 # FIGURE B1 =============================================================================
